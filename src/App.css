@@ -1,25 +1,25 @@
 .App {
-  text-align: center; /* Κεντράρει το περιεχόμενο */
+  text-align: center; 
   display: flex;
-  justify-content: center; /* Κεντράρει οριζόντια */
-  height: 100vh; /* Ορίζουμε το ύψος της σελίδας στο 100% του ύψους του παραθύρου */
+  justify-content: center; 
+  height: 100vh; 
 }
 
 .title {
-  font-size: 3rem; /* Μπορείς να αλλάξεις το μέγεθος της γραμματοσειράς */
+  font-size: 3rem; 
   font-weight: bold;
-  color: #333; /* Μπορείς να αλλάξεις το χρώμα */
+  color: #333; 
 }
 
 .container {
-  background-color: white; /* Άσπρο φόντο για το πλαίσιο */
+  background-color: white; 
   position: absolute;
   top: 150px;
   right: 100;
   height: 450px;
   width: 50%;
-  border-radius: 10px; /* Στρογγυλεμένες γωνίες */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ελαφρύ σκοτεινό σκιά */
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 body {

@@ -10,19 +10,36 @@ function App() {
   const [task, setTask] = useState('');
   const [tasks, setTasks] = useState<Task[]>([]);
   const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [loadedFromStorage, setLoadedFromStorage] = useState(false); 
 
   // Φόρτωσε από localStorage
   useEffect(() => {
     const saved = localStorage.getItem('tasks');
     if (saved) {
-      setTasks(JSON.parse(saved));
+      try {
+        const parsed: Task[] = JSON.parse(saved);
+        if (
+          Array.isArray(parsed) &&
+          parsed.every(t => typeof t.text === 'string' && typeof t.completed === 'boolean')
+        ) {
+          setTasks(parsed);
+        } else {
+          console.warn('Τα δεδομένα δεν έχουν σωστή μορφή.');
+        }
+      } catch (err) {
+        console.error('Αποτυχία στο parsing του localStorage:', err);
+      }
     }
+    setLoadedFromStorage(true); 
   }, []);
 
-  // Αποθήκευση στο localStorage
+  // Αποθήκευση στο localStorage μόνο αφού φορτωθεί
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+    if (loadedFromStorage) {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      console.log('Saving to localStorage:', tasks);
+    }
+  }, [tasks, loadedFromStorage]);
 
   const handleAddTask = () => {
     if (task.trim() === '') return;
